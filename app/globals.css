@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Aquí pueden ir otros estilos globales si los hay */
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

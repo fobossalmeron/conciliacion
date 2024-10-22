@@ -9,18 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "csv-parse": "^5.5.6",
     "next": "^14.2.10",
     "next-nprogress-bar": "^2.3.13",
     "next-share": "^0.27.0",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.2.14",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.53.0"
+    "react-hook-form": "^7.53.0",
+    "sharp": "^0.33.5",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^22.7.4",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
+    "@types/sharp": "^0.32.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
