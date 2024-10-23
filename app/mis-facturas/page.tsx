@@ -23,7 +23,7 @@ export default function MisFacturas() {
   useEffect(() => {
     const fetchTareas = async () => {
       try {
-        const response = await fetch('/api/obtener-tareas');
+        const response = await fetch('/api/ver-facturas');
         if (!response.ok) throw new Error('Error al cargar las tareas');
         const data = await response.json();
         if (Array.isArray(data)) {

@@ -34,14 +34,14 @@ export default function EditarTarea({ params }: { params: { id: string } }) {
   useEffect(() => {
     const fetchTarea = async () => {
       try {
-        const response = await fetch(`/api/tareas/${params.id}`);
+        const response = await fetch(`/api/facturas/${params.id}`);
         if (!response.ok) throw new Error('Error al cargar la tarea');
         const data = await response.json();
         setTarea(data);
         if (data.totalPagado != null) setTotalPagado(data.totalPagado.toString());
         if (data.tipoCambio != null) setTipoCambio(data.tipoCambio.toString());
         if (data.tieneComprobante) {
-          setComprobantePreview(`/api/tareas/${params.id}/comprobante`);
+          setComprobantePreview(`/api/facturas/${params.id}/comprobante`);
         }
         verificarTareaCompleta(data.tieneComprobante, data.totalPagado, data.tipoCambio);
       } catch (error) {
@@ -86,7 +86,7 @@ export default function EditarTarea({ params }: { params: { id: string } }) {
     formData.append('comprobante', comprobante);
 
     try {
-      const response = await fetch(`/api/tareas/${params.id}/comprobante`, {
+      const response = await fetch(`/api/facturas/${params.id}/comprobante`, {
         method: 'PUT',
         body: formData,
       });
@@ -108,7 +108,7 @@ export default function EditarTarea({ params }: { params: { id: string } }) {
     setError(null);
 
     try {
-      const response = await fetch(`/api/tareas/${params.id}/total-pagado`, {
+      const response = await fetch(`/api/facturas/${params.id}/total-pagado`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ export default function EditarTarea({ params }: { params: { id: string } }) {
     setError(null);
 
     try {
-      const response = await fetch(`/api/tareas/${params.id}/tipo-cambio`, {
+      const response = await fetch(`/api/facturas/${params.id}/tipo-cambio`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ export default function EditarTarea({ params }: { params: { id: string } }) {
           {(tarea.tieneComprobante || comprobantePreview) && (
             <div className="mt-2">
               <img 
-                src={comprobantePreview || `/api/tareas/${params.id}/comprobante`} 
+                src={comprobantePreview || `/api/facturas/${params.id}/comprobante`} 
                 alt="Comprobante" 
                 className="w-full h-auto rounded-lg shadow-md" 
               />

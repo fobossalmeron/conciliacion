@@ -35,7 +35,7 @@ export default function CargarDocumentoEmbarque() {
     formData.append('documento', file);
 
     try {
-      const response = await fetch('/api/procesar-documento-embarque', {
+      const response = await fetch('/api/nuevo-embarque', {
         method: 'POST',
         body: formData,
       });

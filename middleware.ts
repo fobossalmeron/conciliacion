@@ -20,5 +20,5 @@ function checkAuthentication(request: NextRequest): boolean {
 }
 
 export const config = {
-  matcher: '/api/tareas/:path*',
+  matcher: '/api/facturas/:path*',
 };
