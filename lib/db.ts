@@ -26,4 +26,23 @@ async function openDb() {
   return db;
 }
 
+export async function initializeDatabase() {
+  const db = await openDb();
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS tareas (
+      id TEXT PRIMARY KEY,
+      numeroFactura TEXT,
+      doctor TEXT,
+      direccion TEXT,
+      paquetes INTEGER,
+      telefono TEXT,
+      comprobantePago BLOB,
+      totalPagado REAL,
+      tipoCambio REAL,
+      createdAt TEXT DEFAULT (datetime('now')),
+      updatedAt TEXT DEFAULT (datetime('now'))
+    )
+  `);
+}
+
 export { openDb };

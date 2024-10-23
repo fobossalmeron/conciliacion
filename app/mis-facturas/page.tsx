@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Factura from '../components/Factura';
 
 interface Tarea {
   id: string;
@@ -15,7 +15,7 @@ interface Tarea {
   tipoCambio?: number | null;
 }
 
-export default function TareasGeneradas() {
+export default function MisFacturas() {
   const [tareas, setTareas] = useState<Tarea[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,27 +45,12 @@ export default function TareasGeneradas() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Tareas Generadas</h1>
       {tareas.length === 0 ? (
         <p className="text-center py-10">No hay tareas disponibles.</p>
       ) : (
         <ul className="space-y-4">
           {tareas.map((tarea) => (
-            <li key={tarea.id} className={`${tarea.totalPagado != null ? 'bg-green-100' : 'bg-white'} shadow rounded-lg p-4`}>
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-lg font-semibold">Factura: {tarea.numeroFactura}</span>
-                <Link href={`/editar-tarea/${tarea.id}`} className="text-blue-600 hover:text-blue-800">
-                  Editar
-                </Link>
-              </div>
-              <p><strong>Doctor:</strong> {tarea.doctor}</p>
-              <p><strong>Dirección:</strong> {tarea.direccion}</p>
-              <p><strong>Paquetes:</strong> {tarea.paquetes}</p>
-              <p><strong>Teléfono:</strong> {tarea.telefono}</p>
-              {tarea.comprobantePago && <p><strong>Comprobante cargado:</strong> Sí</p>}
-              {tarea.totalPagado != null && <p><strong>Total pagado:</strong> ${tarea.totalPagado.toFixed(2)}</p>}
-              {tarea.tipoCambio != null && <p><strong>Tipo de cambio:</strong> {tarea.tipoCambio.toFixed(2)} MXN/USD</p>}
-            </li>
+            <Factura key={tarea.id} {...tarea} />
           ))}
         </ul>
       )}

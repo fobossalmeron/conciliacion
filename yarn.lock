@@ -70,6 +70,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@heroicons/react@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "@heroicons/react@npm:2.1.5"
+  peerDependencies:
+    react: ">= 16"
+  checksum: 10c0/d0ca2d017545da103ed8e90e9e6679d46329c1b09bb4c06ff509b0fe7cfbba7034409ea24b0469fabd2a0a9b144e8e717f58de924615e0b0a1bed7b51fcc5940
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.13.0":
   version: 0.13.0
   resolution: "@humanwhocodes/config-array@npm:0.13.0"
@@ -577,6 +586,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webrtc@npm:0.0.25":
+  version: 0.0.25
+  resolution: "@types/webrtc@npm:0.0.25"
+  checksum: 10c0/7d7653bf0a2318e62e6b0953d4a532adf6591bc00c533f02e0200cf94ee74d0c22a683203b98de4d1655be5f427a8f1b9935104ea44f820e96807735159db475
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/parser@npm:^5.4.2 || ^6.0.0 || 7.0.0 - 7.2.0":
   version: 7.2.0
   resolution: "@typescript-eslint/parser@npm:7.2.0"
@@ -942,6 +958,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"attr-accept@npm:^2.2.2":
+  version: 2.2.4
+  resolution: "attr-accept@npm:2.2.4"
+  checksum: 10c0/602d88b40cb039f1159b86e389ca4f908c13dba513753f7c511e69499ba6216c153519f31a484bac9c9efa633f8f6a4ec25b4f777bd55198f8cb2514cef04618
+  languageName: node
+  linkType: hard
+
 "autoprefixer@npm:^10.4.20":
   version: 10.4.20
   resolution: "autoprefixer@npm:10.4.20"
@@ -1295,6 +1318,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "compras-app@workspace:."
   dependencies:
+    "@heroicons/react": "npm:^2.1.5"
     "@types/node": "npm:^22.7.4"
     "@types/react": "npm:^18.3.10"
     "@types/react-dom": "npm:^18.3.0"
@@ -1311,8 +1335,11 @@ __metadata:
     prettier-plugin-tailwindcss: "npm:^0.6.6"
     react: "npm:^18.2.0"
     react-awesome-reveal: "npm:^4.2.14"
+    react-camera-pro: "npm:^1.4.0"
     react-dom: "npm:^18.2.0"
+    react-dropzone: "npm:^14.2.10"
     react-hook-form: "npm:^7.53.0"
+    react-webcam: "npm:^7.2.0"
     sharp: "npm:^0.33.5"
     sqlite: "npm:^5.1.1"
     sqlite3: "npm:^5.1.7"
@@ -1531,6 +1558,13 @@ __metadata:
   version: 2.0.3
   resolution: "detect-libc@npm:2.0.3"
   checksum: 10c0/88095bda8f90220c95f162bf92cad70bd0e424913e655c20578600e35b91edc261af27531cf160a331e185c0ced93944bc7e09939143225f56312d7fd800fdb7
+  languageName: node
+  linkType: hard
+
+"detectrtc@npm:^1.3.9":
+  version: 1.4.1
+  resolution: "detectrtc@npm:1.4.1"
+  checksum: 10c0/d679dba7d9eaceacd0b4c09ec8e97f2987d6435f650c6d1b23484cf8f4fcf96a12864bf4b8e9826aef660fcaea3af0860d11f1efe55d1bd1249fa02401f57c33
   languageName: node
   linkType: hard
 
@@ -2141,6 +2175,15 @@ __metadata:
   dependencies:
     flat-cache: "npm:^3.0.4"
   checksum: 10c0/58473e8a82794d01b38e5e435f6feaf648e3f36fdb3a56e98f417f4efae71ad1c0d4ebd8a9a7c50c3ad085820a93fc7494ad721e0e4ebc1da3573f4e1c3c7cdd
+  languageName: node
+  linkType: hard
+
+"file-selector@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "file-selector@npm:0.6.0"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  checksum: 10c0/477ca1b56274db9fee1a8a623c4bfef580389726a5fef843af8c1f2f17f70ec2d1e41b29115777c92e120a15f1cca734c6ef36bb48bfa2ee027c68da16cd0d28
   languageName: node
   linkType: hard
 
@@ -4209,6 +4252,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-camera-pro@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "react-camera-pro@npm:1.4.0"
+  dependencies:
+    "@types/webrtc": "npm:0.0.25"
+    detectrtc: "npm:^1.3.9"
+  peerDependencies:
+    react: ^18.3.1
+    react-dom: ^18.3.1
+    styled-components: ^5.1.34
+  checksum: 10c0/68da26c620b67420dc9e07838bb9f72c7e80cfee375e3cabed3693a49a22413277979f00c60b35889ffa000de4e4005ba03a678a31cf4bfdc0eee16b31cfefc5
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^18.2.0":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
@@ -4218,6 +4275,19 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: 10c0/a752496c1941f958f2e8ac56239172296fcddce1365ce45222d04a1947e0cc5547df3e8447f855a81d6d39f008d7c32eab43db3712077f09e3f67c4874973e85
+  languageName: node
+  linkType: hard
+
+"react-dropzone@npm:^14.2.10":
+  version: 14.2.10
+  resolution: "react-dropzone@npm:14.2.10"
+  dependencies:
+    attr-accept: "npm:^2.2.2"
+    file-selector: "npm:^0.6.0"
+    prop-types: "npm:^15.8.1"
+  peerDependencies:
+    react: ">= 16.8 || 18.0.0"
+  checksum: 10c0/07f24b77cae951f8bdbcaeabfca1eacf8699ed79e5924c534d81c0da23bf98a83dae19d5e04419f2010b527233830f69159caabf0cdaedb1aaaaa4fe7efa99f0
   languageName: node
   linkType: hard
 
@@ -4254,6 +4324,16 @@ __metadata:
   version: 18.3.1
   resolution: "react-is@npm:18.3.1"
   checksum: 10c0/f2f1e60010c683479e74c63f96b09fb41603527cd131a9959e2aee1e5a8b0caf270b365e5ca77d4a6b18aae659b60a86150bb3979073528877029b35aecd2072
+  languageName: node
+  linkType: hard
+
+"react-webcam@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "react-webcam@npm:7.2.0"
+  peerDependencies:
+    react: ">=16.2.0"
+    react-dom: ">=16.2.0"
+  checksum: 10c0/d639a9e4cd545f66a5ecbfdc6c38344f6ae40e6609ba5fb26db730b48723158dedeeecdecba94e4d117517f4db0be828169db270c329b9b71d847e54aba6f7f0
   languageName: node
   linkType: hard
 

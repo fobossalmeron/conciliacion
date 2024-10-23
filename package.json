@@ -1,7 +1,10 @@
 {
-  "name": "compras-app",
+  "name": "conciliapp",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,14 +12,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.5",
     "csv-parse": "^5.5.6",
     "next": "^14.2.10",
     "next-nprogress-bar": "^2.3.13",
     "next-share": "^0.27.0",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.2.14",
+    "react-camera-pro": "^1.4.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.10",
     "react-hook-form": "^7.53.0",
+    "react-webcam": "^7.2.0",
     "sharp": "^0.33.5",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
