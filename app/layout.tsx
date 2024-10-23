@@ -7,7 +7,7 @@ import { MobileNav } from './components/MobileNav';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Conciliación",
+  title: "Conciliación de Facturas",
   description: "Sistema para gestionar la conciliación de facturas",
 };
 
@@ -17,16 +17,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
-      <body className={inter.className}>
-        <div className="flex flex-col h-screen bg-gray-100">
-          <MobileNav />
-          <div className="flex flex-1 overflow-hidden">
-            <Sidebar />
-            <main className="flex-1 p-4 overflow-auto">
+    <html lang="es" className="h-full bg-gray-50">
+      <body className={`${inter.className} flex flex-col min-h-full`}>
+        <MobileNav />
+        <div className="flex flex-1 overflow-hidden">
+          <Sidebar />
+          <main className="flex-1 overflow-auto bg-gray-100">
+            <div className="max-w-4xl mx-auto p-4">
               {children}
-            </main>
-          </div>
+            </div>
+          </main>
         </div>
       </body>
     </html>

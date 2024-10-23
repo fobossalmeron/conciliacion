@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { NumericFormat } from 'react-number-format';
 
 interface FacturaProps {
   id: string;
@@ -74,7 +75,7 @@ export default function Factura({
 
   return (
     <Link href={`/conciliar-factura/${id}`} className="block">
-      <li className={`${getEstadoClase()} shadow rounded-lg p-4 hover:shadow-md transition-shadow duration-300 hover:border-blue-500 border-transparent border-2 transition-all`}>
+      <li className={`${getEstadoClase()} shadow rounded-lg p-4 hover:shadow-md active:shadow-md duration-300 hover:border-blue-500 active:border-blue-500 border-transparent border-2 transition-all`}>
         <div className="flex justify-between items-center mb-2">
           <span className="text-3xl font-semibold">{numeroFactura}</span>
           <span className="text-blue-600 hover:text-blue-800">
@@ -98,7 +99,18 @@ export default function Factura({
               <p>
                 <strong>Total: </strong>
                 {totalPagado != null ? (
-                  <>${totalPagado.toFixed(2)}<CheckIcon /></>
+                  <>
+                    <NumericFormat
+                      value={totalPagado}
+                      displayType={'text'}
+                      thousandSeparator=","
+                      decimalSeparator="."
+                      prefix="$"
+                      decimalScale={2}
+                      fixedDecimalScale
+                    />
+                    <CheckIcon />
+                  </>
                 ) : (
                   <>Faltante<XIcon /></>
                 )}
@@ -106,7 +118,15 @@ export default function Factura({
               <p>
                 <strong>TDC: </strong>
                 {tipoCambio != null ? (
-                  <>{tipoCambio.toFixed(2)} <CheckIcon /></>
+                  <>
+                    <NumericFormat
+                      value={tipoCambio}
+                      displayType={'text'}
+                      decimalScale={2}
+                      fixedDecimalScale
+                    />
+                    <CheckIcon />
+                  </>
                 ) : (
                   <>Faltante<XIcon /></>
                 )}

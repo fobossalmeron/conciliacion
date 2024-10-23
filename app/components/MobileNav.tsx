@@ -8,7 +8,7 @@ export function MobileNav() {
   const [nombreSeleccionado, setNombreSeleccionado] = useState(nombres[0]);
 
   return (
-    <nav className="bg-white text-black py-2 px-8 md:hidden">
+    <nav className="bg-white text-black p-2 px-8 md:hidden sticky top-0 z-50">
       <div className="flex items-center justify-between">
         <span className="text-lg font-medium whitespace-nowrap mr-2">Facturas de</span>
         <select 

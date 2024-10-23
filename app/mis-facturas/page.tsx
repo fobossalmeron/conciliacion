@@ -44,7 +44,7 @@ export default function MisFacturas() {
   if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 pb-20">
       {tareas.length === 0 ? (
         <p className="text-center py-10">No hay tareas disponibles.</p>
       ) : (
