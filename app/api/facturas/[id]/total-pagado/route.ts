@@ -7,13 +7,26 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const db = await openDb();
     
     await db.run(`
-      UPDATE tareas
+      UPDATE facturas
       SET totalPagado = ?
       WHERE id = ?
     `, [parseFloat(totalPagado), params.id]);
 
-    const tareaActualizada = await db.get('SELECT id, numeroFactura, doctor, direccion, paquetes, telefono, totalPagado, tipoCambio, (comprobantePago IS NOT NULL) as tieneComprobante FROM tareas WHERE id = ?', params.id);
-    return NextResponse.json(tareaActualizada);
+    const facturaActualizada = await db.get(`
+      SELECT 
+        id, 
+        numeroFactura, 
+        vendedor,
+        numeroEmbarque,
+        fechaEmbarque,
+        totalPagado, 
+        tipoCambio, 
+        (comprobantePago IS NOT NULL) as tieneComprobante 
+      FROM facturas 
+      WHERE id = ?
+    `, params.id);
+    
+    return NextResponse.json(facturaActualizada);
   } catch (error) {
     console.error('Error al actualizar el total pagado:', error);
     return NextResponse.json({ error: 'Error al actualizar el total pagado' }, { status: 500 });

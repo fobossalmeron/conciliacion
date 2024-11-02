@@ -37,7 +37,7 @@ export default function CamaraComprobante({ onCapture }: CamaraComprobanteProps)
   }, [onCapture]);
 
   return (
-    <div className="mt-2">
+    <div className="mt-2 relative">
       <Webcam
         audio={false}
         ref={webcamRef}
@@ -47,13 +47,15 @@ export default function CamaraComprobante({ onCapture }: CamaraComprobanteProps)
         className="w-full h-auto bg-gray-300"
       />
       {isCameraReady && (
-        <Button
-          onClick={capture}
-          variant="primary"
-          className="mt-2"
-        >
-          Capturar comprobante
-        </Button>
+        <div className="absolute inset-0 flex items-center justify-center max-w-content">
+          <Button
+            onClick={capture}
+            variant="primary"
+            className="px-6 py-2 bg-blue-600/90 hover:bg-blue-700/90 backdrop-blur-sm w-auto  max-w-[250px]"
+          >
+            Capturar comprobante
+          </Button>
+        </div>
       )}
     </div>
   );

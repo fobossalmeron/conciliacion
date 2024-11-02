@@ -7,12 +7,23 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const db = await openDb();
     
     await db.run(`
-      UPDATE tareas
+      UPDATE facturas
       SET tipoCambio = ?
       WHERE id = ?
     `, [parseFloat(tipoCambio), params.id]);
 
-    const tareaActualizada = await db.get('SELECT id, numeroFactura, doctor, direccion, paquetes, telefono, totalPagado, tipoCambio, (comprobantePago IS NOT NULL) as tieneComprobante FROM tareas WHERE id = ?', params.id);
+    const tareaActualizada = await db.get(`
+      SELECT 
+        id, 
+        numeroFactura, 
+        totalPagado, 
+        tipoCambio,
+        vendedor,
+        (comprobantePago IS NOT NULL) as tieneComprobante 
+      FROM facturas 
+      WHERE id = ?
+    `, params.id);
+
     return NextResponse.json(tareaActualizada);
   } catch (error) {
     console.error('Error al actualizar el tipo de cambio:', error);

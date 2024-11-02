@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Factura, Embarque } from '../../types/types';
 import FacturaCard from './FacturaCard';
-
+import { formatearFecha } from '../../lib/dateHelpers';
 interface FacturasListProps {
   ejecutivoId?: string;
 }
@@ -68,25 +68,28 @@ export function FacturasList({ ejecutivoId }: FacturasListProps) {
             <h2 className="text-lg font-semibold">
               Embarque: {embarque.numeroEmbarque}
             </h2>
-            <p className="text-sm text-gray-600">
-              Fecha: {new Date(embarque.fechaEmbarque).toLocaleDateString()}
-            </p>
+            {/* <p className="text-sm text-gray-600">
+              Fecha de embarque: {formatearFecha(embarque.fechaEmbarque)}
+            </p> */}
           </div>
           
           <ul className="grid gap-4 p-4 mt-0">
-            {embarque.facturas.map((factura) => (
-              <FacturaCard
-                key={factura.id}
-                id={factura.id}
-                numeroFactura={factura.numeroFactura}
-                vendedor={factura.vendedor}
-                numeroEmbarque={factura.numeroEmbarque}
-                fechaEmbarque={factura.fechaEmbarque}
-                comprobantePago={factura.comprobantePago}
-                totalPagado={factura.totalPagado}
-                tipoCambio={factura.tipoCambio}
-              />
-            ))}
+            {embarque.facturas.map((factura) => {
+              console.log('Factura data:', factura);
+              return (
+                <FacturaCard
+                  key={factura.id}
+                  id={factura.id}
+                  numeroFactura={factura.numeroFactura}
+                  vendedor={factura.vendedor}
+                  numeroEmbarque={factura.numeroEmbarque}
+                  fechaEmbarque={factura.fechaEmbarque}
+                  comprobantePago={factura.comprobantePago}
+                  totalPagado={factura.totalPagado}
+                  tipoCambio={factura.tipoCambio}
+                />
+              );
+            })}
           </ul>
         </div>
       ))}
