@@ -233,15 +233,17 @@ export default function EditarTarea({ params }: { params: { id: string } }) {
                   comprobantePreview || `/api/facturas/${params.id}/comprobante`
                 }
                 alt="Comprobante"
-                className="w-full h-auto rounded-lg shadow-md"
+                className={`h-auto rounded-lg shadow-md ${mostrarCamara ? 'max-w-[100px]' : 'w-full'}`}
               />
-              <Button
-                onClick={handleCambiarComprobante}
-                variant="secondary"
-                className="mt-4"
-              >
-                Cambiar comprobante
-              </Button>
+              {!mostrarCamara && (
+                <Button
+                  onClick={handleCambiarComprobante}
+                  variant="secondary"
+                  className="mt-4"
+                >
+                  Cambiar comprobante
+                </Button>
+              )}
             </div>
           )}
           {mostrarCamara && (
