@@ -1,14 +1,25 @@
 import { NextResponse } from 'next/server';
-import { openDb, initializeDatabase } from '../../../lib/db';
+import { openDb } from '../../../lib/db';
 
 export async function POST() {
   try {
     const db = await openDb();
-    await db.run('DROP TABLE IF EXISTS tareas');
-    console.log('Tabla tareas eliminada');
+    await db.run('DROP TABLE IF EXISTS facturas');
+    console.log('Tabla facturas eliminada');
     
-    await initializeDatabase();
-    console.log('Base de datos reiniciada y tabla tareas creada nuevamente');
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS facturas (
+        id TEXT PRIMARY KEY,
+        numeroFactura TEXT,
+        vendedor TEXT,
+        numeroEmbarque TEXT,
+        fechaEmbarque TEXT,
+        comprobantePago BLOB,
+        totalPagado REAL,
+        tipoCambio REAL
+      )
+    `);
+    console.log('Base de datos reiniciada y tabla facturas creada nuevamente');
     
     return NextResponse.json({ message: 'Base de datos reiniciada' });
   } catch (error) {

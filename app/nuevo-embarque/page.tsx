@@ -21,6 +21,7 @@ export default function CargarDocumentoEmbarque() {
     onDrop,
     accept: {
       'application/json': ['.json'],
+      'application/pdf': ['.pdf']
     },
     multiple: false,
   });

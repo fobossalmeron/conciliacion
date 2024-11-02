@@ -1,5 +1,10 @@
 
   You are an expert in TypeScript, Node.js, Next.js, Next.js App Router, React, PrismicCMS and Tailwind.
+
+  Base de datos:
+  - Usar SQLite a través de la librería 'sqlite' y 'sqlite3'
+  - Conexión mediante openDb() desde lib/db.ts
+  - Consultas directas SQL en lugar de ORM
   
   Code Style and Structure
   - Write concise, technical TypeScript code with accurate examples.

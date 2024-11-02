@@ -1,22 +1,23 @@
 import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
+import { open, Database } from 'sqlite';
 
-let db: any = null;
+let db: Database | null = null;
 
 async function openDb() {
   if (!db) {
     db = await open({
-      filename: './tareas.sqlite',
+      filename: './facturas.sqlite',
       driver: sqlite3.Database
     });
+    
+    // Solo creamos la tabla si no existe
     await db.exec(`
-      CREATE TABLE IF NOT EXISTS tareas (
+      CREATE TABLE IF NOT EXISTS facturas (
         id TEXT PRIMARY KEY,
         numeroFactura TEXT,
-        doctor TEXT,
-        direccion TEXT,
-        paquetes INTEGER,
-        telefono TEXT,
+        vendedor TEXT,
+        numeroEmbarque TEXT,
+        fechaEmbarque TEXT,
         comprobantePago BLOB,
         totalPagado REAL,
         tipoCambio REAL
@@ -24,25 +25,6 @@ async function openDb() {
     `);
   }
   return db;
-}
-
-export async function initializeDatabase() {
-  const db = await openDb();
-  await db.exec(`
-    CREATE TABLE IF NOT EXISTS tareas (
-      id TEXT PRIMARY KEY,
-      numeroFactura TEXT,
-      doctor TEXT,
-      direccion TEXT,
-      paquetes INTEGER,
-      telefono TEXT,
-      comprobantePago BLOB,
-      totalPagado REAL,
-      tipoCambio REAL,
-      createdAt TEXT DEFAULT (datetime('now')),
-      updatedAt TEXT DEFAULT (datetime('now'))
-    )
-  `);
 }
 
 export { openDb };

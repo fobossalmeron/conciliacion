@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
+import AWS from 'aws-sdk';
+import { guardarResultadoTextract } from '../../../lib/documentProcessor';
+import { processTextractResponse } from './extract';
 import { openDb } from '../../../lib/db';
 
-interface EmbarqueItem {
-  Orden: number;
-  ID: string;
-  Doctor: string;
-  Calle: string;
-  Colonia: string;
-  Municipio: string;
-  Paquetes: number;
-  CodigoPostal: string;
-  Telefono: string;
-}
+// Configura AWS Textract
+const textract = new AWS.Textract({
+  region: 'us-east-1',
+  credentials: new AWS.Credentials({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!
+  })
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,29 +22,63 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No se proporcionó ningún archivo' }, { status: 400 });
     }
 
-    const fileContents = await file.text();
-    const embarqueData = JSON.parse(fileContents) as EmbarqueItem[];
+    // Convierte el archivo a un buffer
+    const fileBuffer = await file.arrayBuffer();
 
+    // Llama a Textract para analizar el documento
+    const params = {
+      Document: {
+        Bytes: Buffer.from(fileBuffer)
+      }
+    };
+
+    const textractResponse = await textract.analyzeDocument({
+      ...params,
+      FeatureTypes: ['TABLES', 'FORMS']
+    }).promise();
+
+    // Guardar resultado de Textract
+    await guardarResultadoTextract(
+      file.name,
+      textractResponse,
+      file
+    );
+
+    // Procesa la respuesta de Textract para extraer los datos necesarios
+    const resultado = await processTextractResponse(textractResponse);
+
+    // Guardar las facturas en la base de datos
     const db = await openDb();
-
-    // Convertir los datos del embarque en tareas y guardarlas en la base de datos
-    for (const item of embarqueData) {
+    
+    for (const factura of resultado.embarqueItems) {
       await db.run(`
-        INSERT OR REPLACE INTO tareas (id, numeroFactura, doctor, direccion, paquetes, telefono)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT OR REPLACE INTO facturas (
+          id,
+          numeroFactura,
+          vendedor,
+          numeroEmbarque,
+          fechaEmbarque
+        ) VALUES (?, ?, ?, ?, ?)
       `, [
-        item.ID,
-        item.ID,
-        item.Doctor,
-        `${item.Calle}, ${item.Colonia}, ${item.Municipio}, CP ${item.CodigoPostal}`,
-        item.Paquetes,
-        item.Telefono
+        factura.id,
+        factura.id,
+        factura.vendedor,
+        factura.numeroEmbarque,
+        factura.fechaEmbarque
       ]);
     }
 
-    return NextResponse.json({ message: 'Documento procesado con éxito', tareasCreadas: embarqueData.length });
+    return NextResponse.json({ 
+      message: 'Documento procesado con éxito', 
+      resultado,
+      facturasGuardadas: resultado.embarqueItems.length
+    });
+
   } catch (error) {
     console.error('Error al procesar el documento:', error);
-    return NextResponse.json({ error: 'Error al procesar el documento' }, { status: 500 });
+    return NextResponse.json({ 
+      error: 'Error al procesar el documento',
+      detalles: error instanceof Error ? error.message : 'Error desconocido'
+    }, { status: 500 });
   }
 }

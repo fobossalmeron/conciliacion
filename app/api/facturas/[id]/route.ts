@@ -5,14 +5,27 @@ import sharp from 'sharp';
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const db = await openDb();
-    const tarea = await db.get('SELECT id, numeroFactura, doctor, direccion, paquetes, telefono, totalPagado, tipoCambio, (comprobantePago IS NOT NULL) as tieneComprobante FROM tareas WHERE id = ?', params.id);
-    if (!tarea) {
-      return NextResponse.json({ error: 'Tarea no encontrada' }, { status: 404 });
+    const factura = await db.get(`
+      SELECT 
+        id, 
+        numeroFactura, 
+        vendedor,
+        numeroEmbarque,
+        fechaEmbarque,
+        totalPagado, 
+        tipoCambio, 
+        (comprobantePago IS NOT NULL) as tieneComprobante 
+      FROM facturas 
+      WHERE id = ?
+    `, params.id);
+
+    if (!factura) {
+      return NextResponse.json({ error: 'Factura no encontrada' }, { status: 404 });
     }
-    return NextResponse.json(tarea);
+    return NextResponse.json(factura);
   } catch (error) {
-    console.error('Error al obtener la tarea:', error);
-    return NextResponse.json({ error: 'Error al obtener la tarea' }, { status: 500 });
+    console.error('Error al obtener la factura:', error);
+    return NextResponse.json({ error: 'Error al obtener la factura' }, { status: 500 });
   }
 }
 
@@ -35,7 +48,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     await db.run(`
-      UPDATE tareas
+      UPDATE facturas
       SET comprobantePago = ?,
           totalPagado = ?,
           tipoCambio = ?
@@ -47,10 +60,23 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       params.id
     ]);
 
-    const tareaActualizada = await db.get('SELECT id, numeroFactura, doctor, direccion, paquetes, telefono, totalPagado, tipoCambio, (comprobantePago IS NOT NULL) as tieneComprobante FROM tareas WHERE id = ?', params.id);
-    return NextResponse.json(tareaActualizada);
+    const facturaActualizada = await db.get(`
+      SELECT 
+        id, 
+        numeroFactura, 
+        vendedor,
+        numeroEmbarque,
+        fechaEmbarque,
+        totalPagado, 
+        tipoCambio, 
+        (comprobantePago IS NOT NULL) as tieneComprobante 
+      FROM facturas 
+      WHERE id = ?
+    `, params.id);
+    
+    return NextResponse.json(facturaActualizada);
   } catch (error) {
-    console.error('Error al actualizar la tarea:', error);
-    return NextResponse.json({ error: 'Error al actualizar la tarea' }, { status: 500 });
+    console.error('Error al actualizar la factura:', error);
+    return NextResponse.json({ error: 'Error al actualizar la factura' }, { status: 500 });
   }
 }
