@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { HomeIcon, DocumentTextIcon, PlusCircleIcon, TrashIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline';
+import { DocumentTextIcon, PlusCircleIcon, TrashIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
 export default function Sidebar() {
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link href="/ejecutivos" className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
+            <Link href="/" className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
               <DocumentDuplicateIcon className="w-6 h-6 mr-3" />
               <span className="text-lg">Ejecutivos</span>
             </Link>
@@ -51,10 +51,10 @@ export default function Sidebar() {
         <div className="mt-auto">
           <button 
             onClick={handleVaciarDB} 
-            className="flex items-center w-full p-2 text-white bg-red-500 hover:bg-red-600 rounded transition-colors duration-200"
+            className="flex items-center w-auto p-2 text-white bg-red-500 hover:bg-red-600 rounded transition-colors duration-200"
           >
-            <TrashIcon className="w-6 h-6 mr-3" />
-            <span className="text-lg">Vaciar DB</span>
+            <TrashIcon className="w-4 h-4 mr-2" />
+            <span className="text-sm pr-2">Resetear base de datos</span>
           </button>
         </div>
       </nav>

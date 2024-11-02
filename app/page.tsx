@@ -1,18 +1,24 @@
-import React from 'react'
-import Link from 'next/link'
+'use client';
 
-export default function Home() {
+import { Suspense } from 'react';
+import { KanbanView } from './ejecutivos/KanbanView';
+
+export default function TodasLasFacturas() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Sistema de Conciliación</h1>
-      <div className="space-y-4">
-        <Link href="/nuevo-embarque" className="block text-blue-500 hover:text-blue-700">
-          Nuevo Embarque
-        </Link>
-        <Link href="/mis-facturas" className="block text-blue-500 hover:text-blue-700">
-          Ver Facturas
-        </Link>
+    <div className="min-h-screen p-4">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Ejecutivos</h1>
+        <button 
+          className="px-4 py-2 text-sm font-medium text-blue-700 bg-blue-100 rounded-md hover:bg-blue-200"
+          onClick={() => window.location.reload()}
+        >
+          Actualizar
+        </button>
       </div>
+
+      <Suspense fallback={<div>Cargando tablero...</div>}>
+        <KanbanView />
+      </Suspense>
     </div>
-  )
-}
+  );
+} 

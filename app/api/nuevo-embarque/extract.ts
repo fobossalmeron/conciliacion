@@ -70,6 +70,9 @@ export async function processTextractResponse(
           }
 
           if (vendedor) {
+            // Corregir el nombre del vendedor si es ERICH
+            vendedor = vendedor === 'ERICH' ? 'ERICK' : vendedor;
+            
             console.log('Factura encontrada:', numeroFactura, 'Vendedor:', vendedor);
             
             const factura: Factura = {

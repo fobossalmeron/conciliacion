@@ -103,10 +103,10 @@ export default function FacturaCard({
   );
 
   return (
-    <li
-      className={`${getEstadoClase()} shadow rounded-lg p-4 hover:shadow-md active:shadow-md duration-300 hover:border-blue-500 active:border-blue-500 border-transparent border-2 transition-all list-none`}
-    >
-      <Link href={`/conciliar-factura/${id}`}>
+    <Link href={`/conciliar-factura/${id}`} className="mb-2 block">
+      <li
+        className={`${getEstadoClase()} shadow rounded-lg p-4 hover:shadow-md active:shadow-md duration-300 hover:border-blue-500 active:border-blue-500 border-transparent border-2 transition-all list-none`}
+      >
         <div className="flex justify-between items-center mb-2">
           <span className="text-3xl font-semibold">{numeroFactura}</span>
           {!noActions && (
@@ -182,7 +182,7 @@ export default function FacturaCard({
             </div>
           </>
         )}
-      </Link>
-    </li>
+      </li>{" "}
+    </Link>
   );
 }
