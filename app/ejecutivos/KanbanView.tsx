@@ -101,9 +101,9 @@ export function KanbanView() {
                     <h4 className="text-sm font-medium text-gray-700">
                       Embarque: {embarque.numeroEmbarque}
                     </h4>
-                    <p className="text-xs text-gray-500">
+                    {/* <p className="text-xs text-gray-500">
                       {new Date(embarque.fechaEmbarque).toLocaleDateString()}
-                    </p>
+                    </p> */}
                   </div>
                   
                   <div className="space-y-3">
